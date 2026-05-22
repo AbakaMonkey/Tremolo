@@ -16,7 +16,7 @@
         <button onclick="changeDur('64')">Hemidemisemiquaver</button>
     </div>
 
-    <div class="note-names">
+    <div class="note-names" id="pitches">
         <button onclick="setNoteName('C4')">C</button>
         <button onclick="setNoteName('D4')">D</button>
         <button onclick="setNoteName('E4')">E</button>
@@ -26,10 +26,17 @@
         <button onclick="setNoteName('B4')">B</button>
     </div>
 
+    <label>
+        <input type="text" placeholder="#:#:#" id="position">
+    </label>
+
+    <button onclick="play()"></button>
+
     <div id="notes">
         
     </div>
 
-    <script src="script.js"></script>
+    <script src="https://unpkg.com/tone"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
