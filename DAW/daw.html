@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAW</title>
+</head>
+<body>
+    <div class="note-durations">
+        <button onclick="changeDur('1')">Semibreve</button>
+        <button onclick="changeDur('2')">Minim</button>
+        <button onclick="changeDur('4')">Crochet</button>
+        <button onclick="changeDur('8')">Quaver</button>
+        <button onclick="changeDur('16')">Semiquaver</button>
+        <button onclick="changeDur('32')">Demisemiquaver</button>
+        <button onclick="changeDur('64')">Hemidemisemiquaver</button>
+    </div>
+
+    <div class="note-names">
+        <button onclick="setNoteName('C4')">C</button>
+        <button onclick="setNoteName('D4')">D</button>
+        <button onclick="setNoteName('E4')">E</button>
+        <button onclick="setNoteName('F4')">F</button>
+        <button onclick="setNoteName('G4')">G</button>
+        <button onclick="setNoteName('A4')">A</button>
+        <button onclick="setNoteName('B4')">B</button>
+    </div>
+
+    <div id="notes">
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
