@@ -4,9 +4,9 @@ const synth = new Tone.Synth({
     },
     envelope: {
         attack: 0.02,
-        decay: 0.1,
-        sustain: 1,
-        release: 0.9
+        decay: 0.75,
+        sustain: 0.2,
+        release: 0.1
     }
 }).toDestination();
 
@@ -14,14 +14,32 @@ var selectedDuration = "4";
 var notes = []
 var durations = []
 
+let position = 0;
+
 function newNote(notenameString) {
     const newNoteElement = document.createElement('p');
     newNoteElement.innerHTML = notenameString + ", " + selectedDuration;
 
     document.getElementById("notes").appendChild(newNoteElement);
-    let position = document.getElementById('position');
+    position = Number(document.getElementById('position').value);
 
-    notes.push({ step: position.value, note: notenameString, length: selectedDuration + "n"});
+    notes.push({ step: position, note: notenameString, length: selectedDuration + "n"});
+    document.getElementById('position').value = DurationToStep(selectedDuration) + position;
+
+}
+
+function DurationToStep(duration) {
+    if (duration == "16") {
+        return 1;
+    } else if (duration == "8") {
+        return 2;
+    } else if (duration == "4") {
+        return 4;
+    } else if (duration == "2") {
+        return 8;
+    } else if (duration == "1") {
+        return 16;
+    }
 }
 
 function stepToTransport(step) {
@@ -35,19 +53,6 @@ function stepToTransport(step) {
     return `${bars}:${beat}:${sixteenth}`;
 }
 
-function stepsToDuration(length) {
-
-    const map = {
-        1: "16n",
-        2: "8n",
-        4: "4n",
-        8: "2n",
-        16: "1n"
-    };
-
-    return map[length] || "16n";
-}
-
 window.play = async function() {
 
     await Tone.start();
@@ -58,7 +63,7 @@ window.play = async function() {
     const partData = notes.map(n => ({
         time: stepToTransport(n.step),
         note: n.note,
-        duration: stepsToDuration(n.length)
+        duration: n.length
     }));
 
     const synthTrack = new Tone.Part((time, value) => {
