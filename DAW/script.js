@@ -11,19 +11,25 @@ const synth = new Tone.Synth({
 }).toDestination();
 
 var selectedDuration = "4";
-var notes = []
-var durations = []
+var selectedAccidental = "";
+var notes = [];
 
 let position = 0;
+let positionIndex = 0;
 
 function newNote(notenameString) {
-    const newNoteElement = document.createElement('p');
-    newNoteElement.innerHTML = notenameString + ", " + selectedDuration;
 
-    document.getElementById("notes").appendChild(newNoteElement);
+    let selectedOctave = document.getElementById('octave').value;
+
     position = Number(document.getElementById('position').value);
 
-    notes.push({ step: position, note: notenameString, length: selectedDuration + "n"});
+    let finalNoteString = notenameString + selectedAccidental + String(selectedOctave);
+
+    const newNoteElement = document.createElement('p');
+    newNoteElement.innerHTML = finalNoteString + ", " + selectedDuration;
+    document.getElementById("notes").appendChild(newNoteElement);
+
+    notes.push({ step: position, note: finalNoteString, length: selectedDuration + "n"});
     document.getElementById('position').value = DurationToStep(selectedDuration) + position;
 
 }
@@ -85,6 +91,29 @@ window.changeDur = function(duration) {
     selectedDuration = duration;
 }
 
+window.changeAccidental = function(accidental) {
+    selectedAccidental = accidental;
+}
+
 window.setNoteName = function(notename) {
     newNote(notename);
 }
+
+document.getElementById('position').addEventListener("keydown", function(event) {
+    switch(event.key) {
+        case "ArrowLeft":
+            if (positionIndex > 0) {
+                positionIndex -= 1;
+                position = notes[positionIndex].step;
+                document.getElementById('position').value = position;
+            }
+            break;
+        case "ArrowRight":
+            if (positionIndex < notes.length) {
+                positionIndex += 1;
+                position = notes[positionIndex].step;
+                document.getElementById('position').value = position;
+            }
+            break;
+    }
+})

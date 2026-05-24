@@ -12,25 +12,34 @@
         <button onclick="changeDur('4')">Crochet</button>
         <button onclick="changeDur('8')">Quaver</button>
         <button onclick="changeDur('16')">Semiquaver</button>
-        <button onclick="changeDur('32')">Demisemiquaver</button>
-        <button onclick="changeDur('64')">Hemidemisemiquaver</button>
+    </div>
+
+    <div class="accidental-selection">
+        <button onclick="changeAccidental('b')">b</button>
+        <button onclick="changeAccidental('')">Nat.</button>
+        <button onclick="changeAccidental('#')">#</button>
     </div>
 
     <div class="note-names" id="pitches">
-        <button onclick="setNoteName('C4')">C</button>
-        <button onclick="setNoteName('D4')">D</button>
-        <button onclick="setNoteName('E4')">E</button>
-        <button onclick="setNoteName('F4')">F</button>
-        <button onclick="setNoteName('G4')">G</button>
-        <button onclick="setNoteName('A4')">A</button>
-        <button onclick="setNoteName('B4')">B</button>
+        <button onclick="setNoteName('C')">C</button>
+        <button onclick="setNoteName('D')">D</button>
+        <button onclick="setNoteName('E')">E</button>
+        <button onclick="setNoteName('F')">F</button>
+        <button onclick="setNoteName('G')">G</button>
+        <button onclick="setNoteName('A')">A</button>
+        <button onclick="setNoteName('B')">B</button>
     </div>
 
     <label>
-        <input type="text" placeholder="#:#:#" id="position">
+        Position
+        <input type="text" placeholder="#" id="position">
+    </label>
+    <label>
+        Octave
+        <input type="text" placeholder="#" id="octave">
     </label>
 
-    <button onclick="play()"></button>
+    <button onclick="play()">Play</button>
 
     <div id="notes">
         
