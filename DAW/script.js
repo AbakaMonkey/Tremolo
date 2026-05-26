@@ -26,8 +26,16 @@ function newNote(notenameString) {
     let finalNoteString = notenameString + selectedAccidental + String(selectedOctave);
 
     const newNoteElement = document.createElement('p');
-    newNoteElement.innerHTML = finalNoteString + ", " + selectedDuration;
+    newNoteElement.innerHTML = finalNoteString + ", Duration: " + selectedDuration + ", Position: " + position;
     document.getElementById("notes").appendChild(newNoteElement);
+
+    for (let n in notes) {
+        console.log(n);
+        if (n.step == position) {
+            n.note = finalNoteString;
+            return
+        }
+    }
 
     notes.push({ step: position, note: finalNoteString, length: selectedDuration + "n"});
     document.getElementById('position').value = DurationToStep(selectedDuration) + position;
@@ -104,16 +112,20 @@ document.getElementById('position').addEventListener("keydown", function(event) 
         case "ArrowLeft":
             if (positionIndex > 0) {
                 positionIndex -= 1;
-                position = notes[positionIndex].step;
+                position = notes[positionIndex - 1].step;
                 document.getElementById('position').value = position;
             }
             break;
         case "ArrowRight":
             if (positionIndex < notes.length) {
                 positionIndex += 1;
-                position = notes[positionIndex].step;
+                position = notes[positionIndex - 1].step;
                 document.getElementById('position').value = position;
             }
             break;
+        case "Backspace":
+            console.log(notes);
+            notes[positionIndex - 1].note = null;
+            console.log(notes);
     }
 })
